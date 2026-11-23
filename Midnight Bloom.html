@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Midnight Bloom</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080D1C;--card:#111B30;--sec:#172441;--blue:#528BDF;--lb:#A9C9FF;--w:#E7EEFF;--k:#03050A;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 0,#14264f,var(--bg) 62%) fixed;color:var(--w);font:16px/1.5 Nunito,system-ui,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 6px;font-weight:700}
+h1{font-size:clamp(2.6rem,9vw,4.6rem);letter-spacing:.04em;text-shadow:0 0 28px #528bdf99}h2{font-size:2rem}h3{font-size:1.2rem;color:var(--lb);margin-top:12px}
+button{font:inherit;color:var(--w);background:var(--sec);border:1px solid #2a3d66;border-radius:12px;padding:8px 14px;cursor:pointer;transition:.2s}
+button:hover,button.on{background:#24427a;border-color:var(--lb);box-shadow:0 0 14px #528bdf66}
+button:focus-visible{outline:2px solid var(--lb);outline-offset:2px}
+button.go{background:var(--blue);color:var(--k);font-weight:700;width:100%;margin-top:12px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;flex-wrap:wrap;max-width:1000px;margin:auto;position:relative;z-index:1}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;background:none;border:0}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+main{max-width:1000px;margin:auto;padding:8px 16px 40px;position:relative;z-index:1}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid #223458;border-radius:22px;padding:16px;margin-bottom:14px}
+.hero{text-align:center;padding:18px 0 26px}.hero p{margin:4px;color:var(--lb)}.tag{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--w)!important}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.act{text-align:left;background:var(--card);border-radius:22px;padding:16px}.act:hover{transform:translateY(-3px)}.act svg{width:100%;height:80px}.act b{font:700 1.5rem 'Cormorant Garamond',serif;display:block}.act small{color:var(--lb)}
+.studio{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}@media(max-width:760px){.studio{grid-template-columns:1fr}}
+.stage{display:flex;gap:10px}.rail{display:flex;flex-direction:column;gap:8px}.rail button{width:46px;height:46px;border-radius:50%;padding:0;font-size:20px}
+#bq{flex:1;min-width:0}#bq svg{width:100%;max-height:470px}
+.types{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.types button{display:flex;flex-direction:column;align-items:center;padding:6px 2px;font-size:11px}.types svg{width:80%;height:auto}
+.sws{display:flex;gap:8px;flex-wrap:wrap}.sw{width:30px;height:30px;border-radius:50%;padding:0;color:var(--w)}.sw.on{outline:2px solid var(--w);outline-offset:2px}
+.q{display:flex;align-items:center;gap:14px}.q b{font-size:1.2rem;min-width:20px;text-align:center}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input{font:inherit;color:var(--w);background:var(--sec);border:1px solid #2a3d66;border-radius:12px;padding:8px 12px;flex:1;min-width:140px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0}.chip{display:flex;align-items:center;gap:8px;background:var(--sec);border-radius:14px;padding:6px 8px 6px 10px;flex:none}.chip button{padding:0 8px;border-radius:50%}
+small{color:var(--lb)}
+.saved{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.sv{background:var(--sec);border-radius:16px;padding:8px;text-align:center}.sv button{padding:4px 10px;margin:2px;font-size:13px}
+#gg{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;background:#0a1f2d;padding:8px;border-radius:18px;max-width:640px;margin:10px auto}
+#gg button{aspect-ratio:1;padding:0;border-radius:10px;background:#123547;border-color:#1a4a5e;font-size:clamp(16px,4.5vw,32px);display:flex;align-items:center;justify-content:center}#gg svg{width:84%;height:84%}
+#gtools{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}#gtools button{padding:4px 8px;min-width:44px}
+.pg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px;margin:12px 0}.pc{aspect-ratio:1;padding:4px;font-size:22px;background:#1d2f57}.pc.open{background:#e7eeff14;border-color:var(--lb)}.pc svg{width:90%;height:90%}
+#pmsg{color:var(--lb);font-size:1.2rem;min-height:30px}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.lib button{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px;background:var(--card);border-radius:20px}.lib svg{width:90px;height:90px}.lib .em{font-size:64px;line-height:90px}
+.md{position:fixed;inset:0;background:#03050acc;display:flex;align-items:center;justify-content:center;padding:16px;z-index:5}.md[hidden]{display:none}.md .card{max-width:440px;width:100%;max-height:90vh;overflow:auto;text-align:center;margin:0}.md svg{width:150px;height:150px}.md .em{font-size:110px}.md p{text-align:left;margin:8px 0}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--blue);color:var(--k);font-weight:700;padding:8px 16px;border-radius:20px;opacity:0;pointer-events:none;transition:.3s;z-index:6;max-width:90vw;text-align:center}#toast.on{opacity:1}
+#cat{position:fixed;right:12px;bottom:12px;width:62px;height:62px;border-radius:50%;padding:6px;z-index:4;background:var(--card)}
+.star{position:fixed;width:2px;height:2px;border-radius:50%;background:var(--lb);animation:tw 4s infinite;pointer-events:none}@keyframes tw{50%{opacity:.15}}
+@media(prefers-reduced-motion:reduce){.star{animation:none}*{transition:none!important}}
+footer{text-align:center;margin-top:20px}
+body[data-v=home] nav{display:none}
+section.on{animation:fade .5s}@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.sway{transform-origin:200px 320px;animation:sway 4s ease-in-out infinite alternate}@keyframes sway{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}@keyframes pop{from{transform:scale(0)}}
+.fl{animation:fl 3.5s ease-in-out infinite alternate}@keyframes fl{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+#hcat>div,#cat{animation:bob 3s ease-in-out infinite alternate}@keyframes bob{to{transform:translateY(-6px)}}
+.types svg,#gg svg,.lib svg{transition:transform .25s}.types button:hover svg,#gg button:hover svg,.lib button:hover svg{transform:scale(1.15) rotate(6deg)}
+.petal{position:fixed;top:-5%;opacity:.35;pointer-events:none;animation:fall linear infinite}@keyframes fall{to{transform:translate(60px,110vh) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.sway,.fl,.petal,.pop,#cat,#hcat>div,section.on{animation:none}}
+</style></head><body>
+<header><button class="logo" data-go="home">✿ Midnight Bloom</button><nav><button data-go="home">Home</button><button data-go="studio">Bloom Studio</button><button data-go="garden">Garden</button><button data-go="puzzles">Puzzles</button><button data-go="library">Library</button></nav></header>
+<main>
+<section id="home" class="on"><div class="hero"><div id="hcat"></div><h1>Midnight Bloom</h1><p class="tag">Your little creative escape.</p><p>A little place to create, explore, and enjoy beautiful things.</p></div><div class="grid" id="acts"></div></section>
+<section id="studio"><h2>Bloom Studio</h2><div class="studio"><div class="card stage"><div class="rail" id="rail"></div><div id="bq"></div></div><div class="card" id="panel"></div></div>
+<div class="card"><h3>Selected items (<span id="cnt">0</span>)</h3><div class="chips" id="chips"></div><div class="row"><input id="bname" maxlength="30" placeholder="Name your bouquet"><button id="bsave">Save bouquet</button><button id="bshuf">Rearrange</button><button id="bclr">Clear</button></div></div>
+<div class="card"><h3>My bouquets</h3><div class="saved" id="saved"></div></div></section>
+<section id="garden"><h2>Garden Designer</h2><div class="card"><small>Pick something, then tap a square to place it. Your garden saves as you go.</small><div id="gtools"></div><div class="sws" id="gcols"></div><div id="gg"></div><div class="row"><button id="gsave">Save garden</button><button id="gclr">Clear garden</button></div></div></section>
+<section id="puzzles"><h2>Petal Puzzles</h2><div class="card"><div id="pst"></div><div class="pg" id="pg"></div><div id="pmsg"></div><button id="prs">Restart</button></div></section>
+<section id="library"><h2>Flower Library</h2><div class="lib" id="lib"></div></section>
+<footer><button id="reset">Reset saved creations</button></footer>
+</main>
+<div class="md" id="md" hidden></div><div id="toast"></div><button id="cat" aria-label="Garden cat"></button>
+<script>
+const $=id=>document.getElementById(id),ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>s.replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
+let tt;const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)};
+/* ---- Flower illustrations (c = colour) ---- */
+const R=(n,s)=>Array.from({length:n},(_,i)=>`<g transform="rotate(${i*360/n} 50 50)">${s}</g>`).join('');
+const E=(c,y,rx,ry,x=50)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${c}"/>`,O=(c,r,y=50,x=50)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`;
+const F={
+rose:c=>R(5,E(c,26,16,21))+O(c,19)+`<path d="M38 50a12 12 0 1 1 12 12M44 50a6 6 0 1 1 6 6" fill="none" stroke="#0005" stroke-width="2.5"/>`,
+tulip:c=>`<path d="M26 28Q24 74 50 82Q76 74 74 28L62 46L50 22L38 46Z" fill="${c}"/><path d="M50 22L38 46Q50 80 62 46Z" fill="#fff3"/>`,
+sunflower:c=>R(14,E(c,22,6,16))+O('#3b2a1e',15)+O('#6b4a2b',8),
+lily:c=>R(6,`<path d="M50 50Q34 28 50 6Q66 28 50 50" fill="${c}"/><path d="M50 48V26" stroke="#0004" stroke-width="2"/>`)+O('#ffd23f',4),
+daisy:c=>R(12,E(c,24,5,17))+O('#ffc93c',10),
+hydrangea:c=>R(6,O(c,12,22))+`<g transform="rotate(30 50 50)">${R(6,`<circle cx="50" cy="38" r="10" fill="${c}" opacity=".75"/>`)}</g>`+O(c,9),
+lavender:c=>`<path d="M50 96V12" stroke="#3f9b6a" stroke-width="3"/>`+[16,28,40,52,64].map(y=>E(c,y,8,4.5,40)+E(c,y,8,4.5,60)).join('')+E(c,8,4,7),
+cherry:c=>R(5,`<path d="M50 50Q26 32 38 12L50 22L62 12Q74 32 50 50" fill="${c}"/>`)+O('#ffd23f',5)+R(5,O('#ff4d5e',1.6,36)),
+leaf:c=>`<path d="M50 96Q20 60 50 8Q80 60 50 96" fill="${c}"/><path d="M50 90V20" stroke="#0004" stroke-width="2"/>`};
+const N={rose:'Rose',tulip:'Tulip',sunflower:'Sunflower',lily:'Lily',daisy:'Daisy',hydrangea:'Hydrangea',lavender:'Lavender',cherry:'Cherry Blossom',peony:'Peony',poppy:'Poppy',dahlia:'Dahlia',iris:'Iris',marigold:'Marigold',orchid:'Orchid',leaf:'Leaf'},T=Object.keys(N).filter(k=>k!='leaf');
+/* Richer, layered flower art (overrides the simple versions above) */
+const Z=(k,r)=>`<g transform="rotate(${r} 50 50) translate(${50-50*k} ${50-50*k}) scale(${k})">`,
+Pt=(c,y,w)=>`<path d="M50 50Q${50-w} ${25+y/2} 50 ${y}Q${50+w} ${25+y/2} 50 50Z" fill="${c}" stroke="#0003" stroke-width=".8"/><path d="M50 47V${y+4}" stroke="#fff5" stroke-width="1"/>`,
+flo=(c,x,y,o)=>`<g transform="translate(${x} ${y})" opacity="${o}">${[0,90,180,270].map(a=>`<g transform="rotate(${a})">${E(c,-5,4,5.5,0)}</g>`).join('')}${O('#fff9',1.6,0,0)}</g>`;
+Object.assign(F,{
+rose:c=>R(6,`<ellipse cx="50" cy="24" rx="17" ry="22" fill="${c}" stroke="#0003" stroke-width="1.2"/>`)+Z(.8,30)+R(5,`<ellipse cx="50" cy="26" rx="14" ry="19" fill="${c}" stroke="#0003" stroke-width="1.2"/><ellipse cx="50" cy="20" rx="8" ry="6" fill="#fff3"/>`)+'</g>'+O(c,15)+`<path d="M38 50a12 12 0 1 1 12 12M43 50a7 7 0 1 1 7 7M48 50a2.5 2.5 0 1 1 3 2" fill="none" stroke="#0006" stroke-width="2"/>`,
+tulip:c=>`<path d="M30 30Q26 78 50 86Q74 78 70 30Q60 44 50 18Q40 44 30 30Z" fill="${c}"/><path d="M50 18Q36 48 34 70Q44 84 50 86Q56 84 66 70Q64 48 50 18Z" fill="#fff2"/><path d="M30 30Q26 78 50 86Q38 66 44 40Z" fill="#0002"/><path d="M70 30Q74 78 50 86Q62 66 56 40Z" fill="#0002"/><path d="M50 22Q47 50 50 84" stroke="#fff5" stroke-width="1.5" fill="none"/>`,
+sunflower:c=>`<g opacity=".7">${R(14,Pt(c,5,11))}</g>`+Z(1,13)+R(14,Pt(c,9,11))+'</g>'+O('#2e2016',18)+R(14,O('#6b4a2b',1.7,40))+R(9,O('#8a6238',1.5,47))+O('#4a321f',7),
+lily:c=>Z(1,60)+R(3,Pt(c,5,24))+'</g>'+R(3,Pt(c,5,24))+R(6,`<path d="M50 50V30" stroke="#0003" stroke-width="2"/>${O('#8a2b3a',1.2,38)}${O('#8a2b3a',1.2,32)}`)+R(6,`<path d="M50 50V33" stroke="#e8d28a"/>${O('#b5651d',2,32)}`),
+daisy:c=>`<g opacity=".8">${R(14,Pt(c,6,6))}</g>`+Z(1,12)+R(14,Pt(c,9,6))+'</g>'+O('#d99a00',11)+O('#ffd54a',9)+O('#fff7',2.5,46,46),
+hydrangea:c=>[[0,1],[16,6],[31,12]].flatMap(([r,n])=>Array.from({length:n},(_,i)=>{const a=i*6.283/n+r;return flo(c,50+r*Math.cos(a),50+r*Math.sin(a),.8+(i%3)*.1)})).reverse().join(''),
+lavender:c=>`<path d="M50 98Q49 60 50 14" stroke="#4f9a63" stroke-width="2.5" fill="none"/>`+Array.from({length:10},(_,i)=>{const y=18+i*7,s=1-i*.025;return`<g opacity="${i%2?1:.85}"><ellipse cx="42" cy="${y}" rx="${7*s}" ry="3.6" fill="${c}" transform="rotate(-28 42 ${y})"/><ellipse cx="58" cy="${y}" rx="${7*s}" ry="3.6" fill="${c}" transform="rotate(28 58 ${y})"/></g>`}).join('')+E(c,10,3.5,7),
+cherry:c=>R(5,`<path d="M50 50Q26 32 38 12L50 22L62 12Q74 32 50 50Z" fill="${c}" stroke="#0002" stroke-width=".8"/><path d="M50 48V26" stroke="#fff6"/>`)+O('#c2185b',6)+R(10,`<path d="M50 50V37" stroke="#e8577f" stroke-width=".9"/>${O('#fff1a8',1.5,36)}`),
+peony:c=>{const p=`<path d="M30 50Q20 28 34 15Q42 7 50 13Q58 7 66 15Q80 28 70 50Z" fill="${c}" stroke="#0003"/>`;return R(7,p)+Z(.78,25)+R(7,p)+'</g>'+Z(.55,10)+R(6,p)+'</g>'+Z(.32,40)+R(5,p)+'</g>'+O('#fff3',5)},
+poppy:c=>R(4,`<path d="M50 50Q20 40 26 14Q50 0 74 14Q80 40 50 50Z" fill="${c}" stroke="#0003"/><path d="M50 50L50 16M50 50L36 20M50 50L64 20" stroke="#0002" fill="none"/><ellipse cx="50" cy="40" rx="8" ry="9" fill="#2a0a1a" opacity=".55"/>`)+O('#4a5a24',7)+R(12,O('#1c1c1c',1.4,38)),
+dahlia:c=>`<g opacity=".8">${R(13,Pt(c,5,10))}</g>`+Z(.8,14)+R(13,Pt(c,5,10))+'</g>'+Z(.58,0)+R(11,Pt(c,5,10))+'</g>'+Z(.36,10)+R(9,Pt(c,5,10))+'</g>'+O('#fff3',3),
+iris:c=>Z(1,60)+R(3,Pt(c,6,22))+'</g>'+R(3,Pt(c,4,30)+`<path d="M50 52V30" stroke="#ffd23f" stroke-width="3" stroke-linecap="round"/><path d="M50 56V24" stroke="#fff4"/>`)+O('#0003',3),
+marigold:c=>{const e=`<ellipse cx="50" cy="22" rx="7" ry="12" fill="${c}" stroke="#0003" stroke-width=".8"/>`;return R(16,e)+Z(.82,11)+R(14,e)+'</g>'+Z(.62,0)+R(12,e)+'</g>'+Z(.42,8)+R(10,e)+'</g>'+O('#0002',5)},
+orchid:c=>E(c,22,13,21)+`<g transform="rotate(145 50 50)">${E(c,22,12,20)}</g><g transform="rotate(-145 50 50)">${E(c,22,12,20)}</g>`+E(c,40,21,16,22)+E(c,40,21,16,78)+`<path d="M50 52Q36 62 40 80Q50 90 60 80Q64 62 50 52Z" fill="#d63a8b"/>`+O('#ffe08a',4)});
+const DC={rose:'#ff4d5e',tulip:'#ff8f6b',sunflower:'#ffd23f',lily:'#ff7eb6',daisy:'#f4f6ff',hydrangea:'#6aa8ff',lavender:'#a56bff',cherry:'#ffb7d5',peony:'#ff9bb8',poppy:'#ff5a36',dahlia:'#c13b8a',iris:'#7a5af8',marigold:'#ffa21f',orchid:'#e8b4f0'};
+const CL=['#ff7eb6','#ff8f6b','#6aa8ff','#a56bff','#f4f6ff','#ffd23f','#ff4d5e'],WR=['#528BDF','#1b2a4d','#a56bff','#e7eeff'],RB=['#ffd23f','#ff7eb6','#e7eeff','#528BDF'];
+const thumb=(t,c,s=44)=>`<svg viewBox="0 0 100 100" width="${s}" height="${s}">${F[t](c)}</svg>`;
+const sw=(l,cur,k)=>l.map(c=>`<button class="sw ${c==cur?'on':''}" data-k="${k}" data-v="${c}" style="background:${c||'transparent'}" aria-label="${c||'None'}">${c?'':'×'}</button>`).join('');
+const CAT=`<svg viewBox="0 0 80 80" width="100%" height="100%"><path d="M14 40L16 12L34 26Q40 25 46 26L64 12L66 40Q66 66 40 66Q14 66 14 40Z" fill="#03050A" stroke="#528BDF" stroke-width="2"/><ellipse cx="30" cy="42" rx="4" ry="5" fill="#A9C9FF"/><ellipse cx="50" cy="42" rx="4" ry="5" fill="#A9C9FF"/><path d="M37 50L40 54L43 50Z" fill="#528BDF"/><path d="M20 52H8M60 52H72" stroke="#A9C9FF" stroke-width="1"/></svg>`;
+$('cat').innerHTML=CAT;$('hcat').innerHTML=`<div style="width:84px;height:84px;margin:auto">${CAT}</div>`;
+const tips=['Meow! Hydrangeas look lovely in blue.','Purr… try a ribbon on your bouquet.','Lilies are toxic to cats, so I admire them from afar.','A lamp by the bench makes a cosy corner.'];
+$('cat').onclick=()=>toast(tips[Math.random()*4|0]);
+/* ---- Navigation ---- */
+const V=['home','studio','garden','puzzles','library'];
+function show(id){if(!V.includes(id))id='home';document.body.dataset.v=id;V.forEach(v=>$(v).classList.toggle('on',v==id));document.querySelectorAll('[data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go==id&&b.tagName=='BUTTON'&&!b.classList.contains('act')&&!b.classList.contains('logo')));scrollTo(0,0)}
+const go=id=>{show(id);try{history.replaceState(null,'','#'+id)}catch(e){}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
+const ill=a=>`<svg viewBox="0 0 150 70">${a.map(([t,c],i)=>`<g class="fl" style="transform-origin:${i*45+35}px 70px;animation-delay:${i*.7}s"><svg x="${i*45}" y="0" width="70" height="70" viewBox="0 0 100 100">${F[t](c)}</svg></g>`).join('')}</svg>`;
+$('acts').innerHTML=[['studio','Bloom Studio','Build, ribbon, and name a bouquet',[['rose','#ff7eb6'],['hydrangea','#6aa8ff'],['tulip','#f4f6ff']]],['garden','Garden Designer','Plant a tiny midnight garden',[['lavender','#a56bff'],['daisy','#f4f6ff'],['cherry','#ffb7d5']]],['puzzles','Petal Puzzles','Match the blooms in pairs',[['sunflower','#ffd23f'],['lily','#ff7eb6'],['rose','#6aa8ff']]],['library','Flower Library','Meet ten flowers and their stories',[['tulip','#6aa8ff'],['daisy','#f4f6ff'],['hydrangea','#a56bff']]]].map(([g,n,d,a])=>`<button class="act" data-go="${g}">${ill(a)}<b>${n}</b><small>${d}</small></button>`).join('');
+/* ---- Bloom Studio ---- */
+let cat='Flowers',sel='rose',col=CL[0],qty=1,S={items:[],wrap:'#528BDF',rib:'#ffd23f',seed:1};
+const bq=b=>{const fl=b.items.filter(i=>i.t!='leaf'),lv=b.items.filter(i=>i.t=='leaf'),w=b.wrap,r=b.rib;let s='<svg viewBox="0 0 400 380">';
+ lv.forEach((l,i)=>{const d=i%2?1:-1;s+=`<g transform="translate(200 310) rotate(${d*(22+Math.floor(i/2)*11)}) scale(1.25)"><path d="M0 0Q-30 -45 0 -100Q30 -45 0 0" fill="${l.c}"/><path d="M0 -5V-85" stroke="#0004"/></g>`});
+ if(w)s+=`<path d="M85 150Q200 110 315 150L222 350L178 350Z" fill="${w}" opacity=".85"/>`;
+ s+='<g class="sway">';fl.forEach((f,i)=>{s+=`<path d="M${200+(i%5-2)*3} 312L${f.x} ${f.y}" stroke="#2f7d57" stroke-width="3"/>`});
+ fl.slice().reverse().forEach(f=>{s+=`<g class="${f.n?'pop':''}" style="transform-origin:${f.x}px ${f.y}px"><g transform="rotate(${f.a} ${f.x} ${f.y})"><svg x="${f.x-f.z/2}" y="${f.y-f.z/2}" width="${f.z}" height="${f.z}" viewBox="0 0 100 100">${F[f.t](f.c)}</svg></g></g>`});s+='</g>';
+ if(w)s+=`<path d="M130 235Q200 275 270 235L222 350L178 350Z" fill="${w}" stroke="#fff4"/>`;
+ if(r)s+=`<path d="M200 312Q165 285 168 324Q185 322 200 312ZM200 312Q235 285 232 324Q215 322 200 312Z" fill="${r}"/><path d="M197 316L186 348M203 316L214 348" stroke="${r}" stroke-width="4"/>${O(r,6,312,200)}`;
+ if(!b.items.length)s+='<text x="200" y="200" fill="#A9C9FF" text-anchor="middle" font-size="18">Add flowers to begin</text>';
+ return s+'</svg>'};
+const lay=b=>({...b,items:b.items.map((it,i,a)=>{const k=a.slice(0,i).filter(x=>x.t!='leaf').length,r=26*Math.sqrt(k+.5),ang=k*2.4+b.seed;return{...it,n:b.fresh&&i>=a.length-b.fresh,x:200+r*Math.cos(ang),y:150+r*Math.sin(ang)*.8,z:74+(k*7+b.seed*13)%14,a:(k*47+b.seed*31)%360}})});
+function panel(){const p=$('panel');
+ p.innerHTML=cat=='Flowers'?`<h3>Type</h3><div class="types">${T.map(t=>`<button class="${t==sel?'on':''}" data-t="${t}">${thumb(t,col,40)}<small>${N[t]}</small></button>`).join('')}</div><h3>Colour</h3><div class="sws">${sw(CL,col,'col')}</div>`:cat=='Leaves'?`<h3>Greenery</h3><p>Fresh leaves frame your bouquet.</p>`:cat=='Wrapper'?`<h3>Wrapper</h3><div class="sws">${sw(['',...WR],S.wrap,'wrap')}</div>`:`<h3>Ribbon</h3><div class="sws">${sw(['',...RB],S.rib,'rib')}</div>`;
+ if(cat=='Flowers'||cat=='Leaves')p.innerHTML+=`<h3>Quantity</h3><div class="q"><button data-q="-1">−</button><b>${qty}</b><button data-q="1">+</button></div><button class="go" data-add>Add to bouquet</button>`}
+$('panel').onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(d.t)sel=d.t;if(d.k=='col')col=d.v;else if(d.k)S[d.k]=d.v;
+ if(d.q)qty=Math.min(6,Math.max(1,qty+ +d.q));
+ if('add' in d){if(S.items.length+qty>24)return toast('The bouquet is full');for(let i=0;i<qty;i++)S.items.push(cat=='Leaves'?{t:'leaf',c:'#3f9b6a'}:{t:sel,c:col});S.fresh=qty}
+ studio()};
+$('rail').onclick=e=>{const b=e.target.closest('button');if(b){cat=b.dataset.c;studio()}};
+$('chips').onclick=e=>{const k=e.target.dataset.x;if(k){S.items=S.items.filter(i=>i.t+i.c!=k);studio()}};
+$('bshuf').onclick=()=>{S.seed++;studio()};$('bclr').onclick=()=>{S.items=[];studio()};
+$('bsave').onclick=()=>{if(!S.items.length)return toast('Add a few flowers first');const l=ld('mb_b',[]);l.push({...JSON.parse(JSON.stringify(S)),name:$('bname').value.trim()||'Untitled bouquet'});sv('mb_b',l);$('bname').value='';studio();toast('Bouquet saved')};
+$('saved').onclick=e=>{const d=e.target.dataset,l=ld('mb_b',[]);if(d.l){S=JSON.parse(JSON.stringify(l[d.l]));$('bname').value=S.name;delete S.name;toast('Bouquet loaded')}if(d.d)l.splice(d.d,1),sv('mb_b',l);studio()};
+function studio(){panel();$('rail').innerHTML=[['Flowers','🌷'],['Leaves','🌿'],['Wrapper','🎁'],['Ribbon','🎀']].map(([c,e])=>`<button class="${c==cat?'on':''}" data-c="${c}" title="${c}" aria-label="${c}">${e}</button>`).join('');
+ $('bq').innerHTML=bq(lay(S));S.fresh=0;$('cnt').textContent=S.items.length;
+ const g={};S.items.forEach(i=>{const k=i.t+i.c;(g[k]=g[k]||{...i,n:0}).n++});
+ $('chips').innerHTML=Object.entries(g).map(([k,i])=>`<div class="chip">${thumb(i.t,i.c,34)}<span>${N[i.t]}<br><small>Qty ${i.n}</small></span><button data-x="${k}" aria-label="Remove">×</button></div>`).join('')||'<small>Nothing yet. Pick a flower and tap Add.</small>';
+ const l=ld('mb_b',[]);$('saved').innerHTML=l.map((b,i)=>`<div class="sv">${bq(lay(b))}<b>${esc(b.name)}</b><br><button data-l="${i}">Open</button><button data-d="${i}">Delete</button></div>`).join('')||'<small>Saved bouquets appear here.</small>'}
+/* ---- Garden Designer ---- */
+let G=ld('mb_g',Array(48).fill('')),gt='f:rose';const DE=['🌳','🏮','🪑','🪨'];
+function garden(){$('gtools').innerHTML=T.map(t=>`<button class="${gt=='f:'+t?'on':''}" data-t="f:${t}" aria-label="${N[t]}">${thumb(t,col,32)}</button>`).join('')+DE.map(e=>`<button class="${gt=='d:'+e?'on':''}" data-t="d:${e}">${e}</button>`).join('')+`<button class="${gt=='x'?'on':''}" data-t="x">✖ Erase</button>`;
+ $('gcols').innerHTML=sw(CL,col,'col');
+ $('gg').innerHTML=G.map((v,i)=>{const p=v.split(':');return`<button data-i="${i}" aria-label="Square ${i+1}">${p[0]=='f'?thumb(p[1],p[2],40):p[0]=='d'?p[1]:''}</button>`}).join('')}
+$('gtools').onclick=e=>{const b=e.target.closest('button');if(b){gt=b.dataset.t;garden()}};
+$('gcols').onclick=e=>{const b=e.target.closest('button');if(b){col=b.dataset.v;garden()}};
+$('gg').onclick=e=>{const b=e.target.closest('button');if(!b)return;G[b.dataset.i]=gt=='x'?'':gt[0]=='f'?gt+':'+col:gt;sv('mb_g',G);garden()};
+$('gsave').onclick=()=>{sv('mb_g',G);toast('Garden saved')};$('gclr').onclick=()=>{G=Array(48).fill('');sv('mb_g',G);garden()};
+/* ---- Petal Puzzles ---- */
+let P=[],pf=[],pm=0,pt=0,pi=0,pl=0;
+const pstat=()=>{const b=ld('mb_best',0);$('pst').innerHTML=`Moves: <b>${pm}</b> &nbsp; Time: <b>${pt}s</b>`+(b?` &nbsp; <small>Best: ${b}s</small>`:'')};
+function pdraw(){$('pg').innerHTML=P.map((c,i)=>{const o=c.o||c.m;return`<button class="pc ${o?'open':''}" data-i="${i}" aria-label="Card ${i+1}">${o?thumb(c.t,DC[c.t],60):'✦'}</button>`}).join('');pstat()}
+function pnew(){clearInterval(pi);pi=0;{const k=[...T].sort(()=>Math.random()-.5).slice(0,8);P=[...k,...k].sort(()=>Math.random()-.5).map(t=>({t,o:0,m:0}))};pf=[];pm=0;pt=0;pl=0;$('pmsg').textContent='';pdraw()}
+$('pg').onclick=e=>{const b=e.target.closest('button');if(!b||pl)return;const c=P[b.dataset.i];if(c.o||c.m)return;
+ if(!pi)pi=setInterval(()=>{pt++;pstat()},1000);c.o=1;pf.push(c);
+ if(pf.length==2){pm++;const[a,d]=pf;if(a.t==d.t){a.m=d.m=1;a.o=d.o=0;pf=[];if(P.every(x=>x.m)){clearInterval(pi);const bs=ld('mb_best',0);if(!bs||pt<bs)sv('mb_best',pt);$('pmsg').textContent=`All bloomed! ${pm} moves in ${pt} seconds.`}}
+  else{pl=1;setTimeout(()=>{a.o=d.o=0;pf=[];pl=0;pdraw()},800)}}
+ pdraw()};
+$('prs').onclick=pnew;
+/* ---- Flower Library ---- */
+const L=[['rose','Rose','Layered petals and a famous fragrance, from tiny shrubs to tall climbers.','Admiration and appreciation.','Rose fossils are about 35 million years old, far older than people.'],
+['tulip','Tulip','A cup-shaped spring bloom in almost every colour.','Cheerfulness and renewal.','In 1600s Netherlands, tulip bulbs became so prized that prices soared in “tulip mania.”'],
+['sunflower','Sunflower','A tall, sunny bloom with a dark seed-filled centre.','Loyalty and positivity.','Young sunflowers turn to follow the sun across the sky.'],
+['lily','Lily','An elegant trumpet-shaped flower with six graceful petals.','Renewal and purity.','Many lilies are toxic to cats, so keep them out of paws’ reach.'],
+['daisy','Daisy','A cheerful white flower with a golden middle.','Innocence and cheerfulness.','Each daisy is really a cluster of many tiny flowers.'],
+['hydrangea','Hydrangea','Big round clusters of small blossoms in soft blues and pinks.','Gratitude and grace.','Soil acidity can shift a hydrangea’s colour from pink to blue.'],
+['lavender','Lavender','A fragrant purple spike loved by bees and gardeners.','Calm and serenity.','Its name likely comes from the Latin word for “to wash.”'],
+['cherry','Cherry Blossom','Soft pink spring petals that cover whole trees at once.','Fleeting beauty and renewal.','Blossom-viewing parties in Japan have been held for over a thousand years.'],
+['peony','Peony','Full, ruffled blooms that look like soft pom-poms.','Prosperity and good fortune.','Some peony plants keep blooming for decades.'],
+['poppy','Poppy','Silky, papery petals around a dark centre.','Remembrance and rest.','Poppy seeds can stay dormant in soil for many years before sprouting.'],
+['dahlia','Dahlia','Geometric layers of pointed petals in nearly every colour.','Elegance and dignity.','The dahlia is the national flower of Mexico.'],
+['iris','Iris','Tall blooms with upright petals and drooping “falls.”','Hope and wisdom.','The iris is named after the Greek goddess of the rainbow.'],
+['marigold','Marigold','Golden-orange pom-poms that glow in the garden.','Warmth and celebration.','Marigold petals are edible and add colour to salads.'],
+['orchid','Orchid','Graceful, long-lasting blooms with a distinctive lip petal.','Refinement and strength.','Orchids are one of the largest plant families, with over 25,000 species.'],
+['🪷','Lotus','A water flower that rises clean above muddy ponds.','Purity and rebirth.','Lotus leaves repel water, so raindrops roll right off.'],
+['🌺','Hibiscus','A bold tropical bloom with big, silky petals.','Delicate beauty.','Dried hibiscus petals make a tart, ruby-red tea.']];
+const pic=(k,c,big)=>F[k]?thumb(k,c||DC[k],big?150:90):`<div class="em">${k}</div>`;
+$('lib').innerHTML=L.map((f,i)=>`<button data-i="${i}">${pic(f[0])}<b>${f[1]}</b></button>`).join('');
+$('lib').onclick=e=>{const b=e.target.closest('button');if(!b)return;const f=L[b.dataset.i];$('md').innerHTML=`<div class="card">${pic(f[0],0,1)}<h2>${f[1]}</h2><p>${f[2]}</p><p><b>Meaning:</b> ${f[3]}</p><p><b>Did you know?</b> ${f[4]}</p><button data-close>Close</button></div>`;$('md').hidden=false};
+$('md').onclick=e=>{if(e.target.id=='md'||e.target.dataset.close!=null)$('md').hidden=true};
+/* ---- Reset ---- */
+let rc=0;$('reset').onclick=e=>{const b=e.target;if(!rc){rc=1;b.textContent='Tap again to confirm';setTimeout(()=>{rc=0;b.textContent='Reset saved creations'},3000);return}
+ ['mb_b','mb_g','mb_best'].forEach(k=>{try{localStorage.removeItem(k)}catch(x){}});G=Array(48).fill('');rc=0;b.textContent='Reset saved creations';studio();garden();pnew();toast('Saved creations cleared')};
+/* ---- Start ---- */
+for(let i=0;i<45;i++){const s=document.createElement('i');s.className='star';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*4}s`;document.body.append(s)}
+for(let i=0;i<8;i++){const p=document.createElement('i');p.className='petal';p.textContent='🌸';p.style.cssText=`left:${i*13+Math.random()*8}%;animation-duration:${14+Math.random()*10}s;animation-delay:${-Math.random()*20}s;font-size:${12+Math.random()*10}px`;document.body.append(p)}
+studio();garden();pnew();show(location.hash.slice(1));
+</script></body></html>
